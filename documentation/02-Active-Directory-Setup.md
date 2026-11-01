@@ -22,6 +22,8 @@ The server provides Active Directory Domain Services and DNS for the lab environ
 
 ## Organizational Unit Structure
 
+![Active Directory OU Structure](../screenshots/active-directory/01-ou-structure.png)
+
 Created the following organizational structure to separate administrative objects by function.
 
 ```text
@@ -57,6 +59,8 @@ Created eight employee accounts across four departments.
 
 ## Security Groups
 
+![Department Security Groups](../screenshots/active-directory/07-security-groups.png)
+
 Created four Global Security groups:
 
 | Group            | Purpose                   |
@@ -71,6 +75,8 @@ These groups are used to assign permissions to departmental file shares hosted o
 Group-based access management reduces the need to assign permissions directly to individual users.
 
 ## Domain-Joined Workstation
+
+![Domain Authentication Verification](../screenshots/active-directory/09-domain-login.png)
 
 Deployed a Windows 11 virtual machine named CLIENT01.
 
