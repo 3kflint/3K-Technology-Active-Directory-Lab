@@ -20,6 +20,31 @@ The project focuses on centralized identity management, domain authentication, s
 | FS01     | Windows Server 2025 | File Server               | 192.168.148.20 |
 | CLIENT01 | Windows 11          | Domain-Joined Workstation | DHCP           |
 
+## Project Documentation
+
+The following documentation provides a detailed breakdown of the infrastructure deployment, security configurations, testing procedures, and troubleshooting performed throughout this project.
+
+| Documentation                                                                | Description                                                                                                   |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| [Active Directory Configuration](documentation/02-Active-Directory-Setup.md) | Domain controller deployment, organizational units, user accounts, security groups, and domain authentication |
+| [Group Policy Configuration](documentation/03-Group-Policy.md)               | Workstation security baseline, password policies, account lockout settings, and PowerShell verification       |
+| [File Server Configuration](documentation/04-File-Server-Configuration.md)   | Windows Server file services, SMB shares, NTFS permissions, and departmental access controls                  |
+| [Security Testing](documentation/05-Security-Testing.md)                     | Authorized and unauthorized file access testing using domain accounts                                         |
+| [Troubleshooting](documentation/06-Troubleshooting.md)                       | Windows Server installation errors, issue resolution, and post-resolution verification                        |
+
+### Key Project Accomplishments
+
+* Deployed three virtual machines using VMware Workstation.
+* Configured Windows Server 2025 as an Active Directory domain controller.
+* Created eight employee accounts across four departments.
+* Implemented departmental security groups for role-based access control.
+* Configured workstation security and domain account policies using Group Policy.
+* Deployed a dedicated Windows Server file server with four SMB shares.
+* Implemented departmental NTFS and SMB permissions.
+* Validated authorized and unauthorized access from a Windows 11 domain-joined workstation.
+* Documented deployment challenges and troubleshooting outcomes.
+
+
 **Active Directory Domain:** `corp.3ktechnology.test`
 
 **Virtualization Platform:** VMware Workstation
