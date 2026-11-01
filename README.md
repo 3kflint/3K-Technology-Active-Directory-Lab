@@ -1,158 +1,300 @@
 # 3K Technology | Active Directory & File Server Lab
 
-### Windows Server 2025 • Active Directory • Group Policy • DNS • SMB • NTFS • VMware
+**Windows Server 2025 | Active Directory | Group Policy | DNS | SMB | NTFS | VMware | PowerShell**
 
 ## Project Overview
 
-Designed and deployed a virtual enterprise IT environment for a fictional organization, **3K Technology**, to gain hands-on experience administering Windows infrastructure.
+Designed, deployed, and documented a virtual enterprise IT environment for a fictional organization, **3K Technology**, to gain hands-on experience with Windows Server administration, Active Directory, networking, and enterprise security.
 
-The environment simulates a small business with four departments: IT, Human Resources, Finance, and Sales.
+The environment simulates a small business with four departments: **IT, Human Resources, Finance, and Sales**.
 
-The project focuses on centralized identity management, domain authentication, security policies, network file sharing, and role-based access control.
+The project focuses on centralized identity management, domain authentication, Group Policy administration, departmental file sharing, and role-based access control.
 
-## Lab Architecture
+### Project Objectives
+
+* Deploy and configure Windows Server infrastructure.
+* Implement centralized authentication using Active Directory Domain Services (AD DS).
+* Configure DNS for domain name resolution.
+* Organize users, computers, and security groups using Organizational Units (OUs).
+* Implement workstation security settings using Group Policy.
+* Deploy a dedicated file server with departmental SMB shares.
+* Configure NTFS and SMB permissions using Active Directory security groups.
+* Validate authorized and unauthorized access from a domain-joined workstation.
+* Document infrastructure deployment, troubleshooting, and security testing.
+
+---
+
+## Network Architecture
 
 ![3K Technology Network Architecture](network-architecture.png)
 
-| System   | Operating System    | Role                      | IP Address     |
-| -------- | ------------------- | ------------------------- | -------------- |
-| DC01     | Windows Server 2025 | Domain Controller, DNS    | 192.168.148.10 |
-| FS01     | Windows Server 2025 | File Server               | 192.168.148.20 |
-| CLIENT01 | Windows 11          | Domain-Joined Workstation | DHCP           |
+### Infrastructure Overview
+
+| System   | Operating System    | Role                                 | IP Address     |
+| -------- | ------------------- | ------------------------------------ | -------------- |
+| DC01     | Windows Server 2025 | Domain Controller, DNS, Group Policy | 192.168.148.10 |
+| FS01     | Windows Server 2025 | File Server, SMB Shares              | 192.168.148.20 |
+| CLIENT01 | Windows 11          | Domain-Joined Workstation            | DHCP           |
+
+### Network Configuration
+
+| Setting                 | Configuration            |
+| ----------------------- | ------------------------ |
+| Active Directory Domain | `corp.3ktechnology.test` |
+| NetBIOS Domain          | `CORP`                   |
+| Virtualization Platform | VMware Workstation       |
+| Network Type            | VMware NAT (VMnet8)      |
+| Network Subnet          | `192.168.148.0/24`       |
+| Default Gateway         | `192.168.148.2`          |
+| DNS Server              | `192.168.148.10`         |
+
+The lab uses VMware NAT networking to provide connectivity between the virtual machines while maintaining a separate virtualized network environment.
+
+---
+
+## Key Project Accomplishments
+
+### Active Directory Deployment
+
+* Installed and configured Active Directory Domain Services on Windows Server 2025.
+* Promoted DC01 to a domain controller.
+* Configured DNS to support domain authentication and name resolution.
+* Created a structured Organizational Unit hierarchy.
+* Created eight employee accounts across four departments.
+* Configured four departmental security groups.
+* Joined CLIENT01 and FS01 to the Active Directory domain.
+* Verified domain authentication from a Windows 11 workstation.
+
+### Group Policy Administration
+
+* Created a workstation security baseline GPO.
+* Linked the security baseline to the Computers OU.
+* Configured a 10-minute workstation inactivity lock.
+* Configured domain account lockout settings.
+* Reviewed password policy configuration.
+* Used PowerShell to verify domain policy settings.
+
+### File Server Deployment
+
+* Deployed FS01 using Windows Server 2025.
+* Installed the File Server role service.
+* Provisioned an additional 10 GB virtual disk.
+* Initialized the disk using GPT and formatted it with NTFS.
+* Configured the `F:` drive for departmental data storage.
+* Created four departmental SMB shares.
+* Implemented departmental NTFS and SMB permissions.
+* Integrated file access permissions with Active Directory security groups.
+
+### Security Testing
+
+* Authenticated to CLIENT01 using a domain account.
+* Verified authorized access to the IT file share.
+* Successfully created and saved a test file.
+* Confirmed access restrictions for HR, Finance, and Sales shares.
+* Documented access-control test results.
+
+### Troubleshooting
+
+* Encountered and resolved a File Server role installation issue.
+* Captured installation error evidence.
+* Verified File Server functionality after installation.
+* Documented troubleshooting outcomes and post-resolution validation.
+
+---
 
 ## Project Documentation
 
-The following documentation provides a detailed breakdown of the infrastructure deployment, security configurations, testing procedures, and troubleshooting performed throughout this project.
+Detailed technical documentation and configuration screenshots are available below.
 
-| Documentation                                                                | Description                                                                                                   |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| [Active Directory Configuration](documentation/02-Active-Directory-Setup.md) | Domain controller deployment, organizational units, user accounts, security groups, and domain authentication |
-| [Group Policy Configuration](documentation/03-Group-Policy.md)               | Workstation security baseline, password policies, account lockout settings, and PowerShell verification       |
-| [File Server Configuration](documentation/04-File-Server-Configuration.md)   | Windows Server file services, SMB shares, NTFS permissions, and departmental access controls                  |
-| [Security Testing](documentation/05-Security-Testing.md)                     | Authorized and unauthorized file access testing using domain accounts                                         |
-| [Troubleshooting](documentation/06-Troubleshooting.md)                       | Windows Server installation errors, issue resolution, and post-resolution verification                        |
+| Documentation                                                                | Description                                                                                                         |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| [Active Directory Configuration](documentation/02-Active-Directory-Setup.md) | Domain controller deployment, DNS, Organizational Units, user accounts, security groups, and domain authentication  |
+| [Group Policy Configuration](documentation/03-Group-Policy.md)               | Workstation security baseline, password policy, account lockout settings, and PowerShell verification               |
+| [File Server Configuration](documentation/04-File-Server-Configuration.md)   | Windows Server file services, storage configuration, SMB shares, NTFS permissions, and departmental access controls |
+| [Security Testing](documentation/05-Security-Testing.md)                     | Authorized and unauthorized departmental file access testing                                                        |
+| [Troubleshooting](documentation/06-Troubleshooting.md)                       | File Server installation failure, troubleshooting documentation, and post-resolution verification                   |
 
-### Key Project Accomplishments
+---
 
-* Deployed three virtual machines using VMware Workstation.
-* Configured Windows Server 2025 as an Active Directory domain controller.
-* Created eight employee accounts across four departments.
-* Implemented departmental security groups for role-based access control.
-* Configured workstation security and domain account policies using Group Policy.
-* Deployed a dedicated Windows Server file server with four SMB shares.
-* Implemented departmental NTFS and SMB permissions.
-* Validated authorized and unauthorized access from a Windows 11 domain-joined workstation.
-* Documented deployment challenges and troubleshooting outcomes.
+## Active Directory Structure
 
-
-**Active Directory Domain:** `corp.3ktechnology.test`
-
-**Virtualization Platform:** VMware Workstation
-
-**Network Configuration:** VMware NAT
-
-## Active Directory Configuration
-
-Installed and configured Active Directory Domain Services (AD DS) and DNS on DC01.
-
-Created a structured organizational hierarchy to manage departmental users, computers, servers, and security groups.
-
-### Organizational Units
-
-* IT
-* HR
-* Finance
-* Sales
-* Computers
-* Servers
-* Groups
-* Disabled Accounts
-
-### User and Group Management
-
-Created eight employee accounts across four departments.
-
-Configured security groups to manage access to departmental resources:
-
-| Department | Security Group   |
-| ---------- | ---------------- |
-| IT         | SG_IT_Users      |
-| HR         | SG_HR_Users      |
-| Finance    | SG_Finance_Users |
-| Sales      | SG_Sales_Users   |
-
-Used group-based permissions to simplify access management.
-
-## Group Policy Configuration
-
-Configured Group Policy Objects (GPOs) to implement security settings across the domain.
-
-Policies included:
-
-* Workstation inactivity lock
-* Account lockout threshold
-* Account lockout duration
-* Password complexity requirements
-* Password length requirements
-
-Used Group Policy Management and PowerShell to inspect and validate policy configurations.
-
-## File Server Deployment
-
-Deployed FS01 as a dedicated Windows Server 2025 file server.
-
-Added a separate 10GB virtual disk, initialized it using GPT, and formatted it with NTFS.
-
-Created departmental folders on the F: drive:
+Created a structured Organizational Unit hierarchy to organize departmental users, computers, servers, and security groups.
 
 ```text
-F:\Shares
-├── IT
-├── HR
-├── Finance
-└── Sales
+corp.3ktechnology.test
+│
+└── 3K-Technology
+    │
+    ├── Computers
+    ├── Disabled-Accounts
+    ├── Groups
+    ├── Servers
+    │
+    └── Users
+        ├── IT
+        ├── HR
+        ├── Finance
+        └── Sales
 ```
 
-Configured SMB network shares for each department.
+### Departmental Security Groups
 
-| Department | Network Share    |
-| ---------- | ---------------- |
-| IT         | `\\FS01\it`      |
-| HR         | `\\FS01\hr`      |
-| Finance    | `\\FS01\finance` |
-| Sales      | `\\FS01\sales`   |
+| Department      | Active Directory Security Group |
+| --------------- | ------------------------------- |
+| IT              | `SG_IT_Users`                   |
+| Human Resources | `SG_HR_Users`                   |
+| Finance         | `SG_Finance_Users`              |
+| Sales           | `SG_Sales_Users`                |
 
-### File Access Security
+These groups provide centralized access management for departmental resources.
 
-Implemented departmental access controls using:
+**[View Active Directory Configuration and Screenshots](documentation/02-Active-Directory-Setup.md)**
+
+---
+
+## File Server Architecture
+
+Configured FS01 to provide centralized departmental file storage.
+
+### Storage Structure
+
+```text
+F:\
+└── Shares\
+    ├── IT\
+    ├── HR\
+    ├── Finance\
+    └── Sales\
+```
+
+### Departmental SMB Shares
+
+| Department | Network Share    | Authorized Security Group |
+| ---------- | ---------------- | ------------------------- |
+| IT         | `\\FS01\it`      | `SG_IT_Users`             |
+| HR         | `\\FS01\hr`      | `SG_HR_Users`             |
+| Finance    | `\\FS01\finance` | `SG_Finance_Users`        |
+| Sales      | `\\FS01\sales`   | `SG_Sales_Users`          |
+
+Implemented group-based access control using:
 
 * Active Directory security groups
-* NTFS permissions
 * SMB share permissions
+* NTFS file system permissions
 
-Configured departmental groups with Modify permissions on their respective folders and Change permissions on their network shares.
+Departmental groups were configured with Modify permissions on their respective NTFS folders and Change permissions on their network shares.
 
-Restricted unauthorized access to other departments.
+**[View File Server Configuration and Screenshots](documentation/04-File-Server-Configuration.md)**
 
-## Security Testing
+---
 
-Performed access control testing from CLIENT01 using the domain account `CORP\jcarter`.
+## Security Validation
 
-| Test                    | Expected Result | Actual Result |
-| ----------------------- | --------------- | ------------- |
-| Access IT share         | Allowed         | PASS          |
-| Create and save IT file | Allowed         | PASS          |
-| Access HR share         | Denied          | PASS          |
-| Access Finance share    | Denied          | PASS          |
-| Access Sales share      | Denied          | PASS          |
+Performed file access testing from CLIENT01 using the Active Directory account:
 
-The tests verified that the IT employee could access authorized resources while access to other departments was denied.
+**Test Account:** `CORP\jcarter`
+**Department:** IT
+**Security Group:** `SG_IT_Users`
 
-## Troubleshooting
+### Test Results
 
-Encountered and investigated several issues during deployment, including:
+| Test                    | Expected Result  | Observed Result  | Status |
+| ----------------------- | ---------------- | ---------------- | ------ |
+| Domain authentication   | Successful login | Successful login | PASS   |
+| Access IT share         | Allowed          | Allowed          | PASS   |
+| Create file in IT share | Allowed          | File created     | PASS   |
+| Access HR share         | Denied           | Access denied    | PASS   |
+| Access Finance share    | Denied           | Access denied    | PASS   |
+| Access Sales share      | Denied           | Access denied    | PASS   |
 
-* DNS resolution and connectivity issues
-* Domain authentication problems
-* File Server role installation failure
-* Security group lookup and permission con
+### Security Testing Outcome
+
+**6 of 6 documented tests passed.**
+
+The results demonstrate that the tested IT account could access its authorized departmental resources while access to other departmental shares was restricted.
+
+Testing was limited to the IT account. Additional departmental account testing is planned.
+
+### Access Denied Evidence
+
+![Departmental Access Denied](screenshots/security-testing/01-access-denied.png)
+
+**[View Complete Security Testing Documentation](documentation/05-Security-Testing.md)**
+
+---
+
+## Technologies & Skills
+
+| Technology                       | Skills Demonstrated                                        |
+| -------------------------------- | ---------------------------------------------------------- |
+| Windows Server 2025              | Server deployment, configuration, and administration       |
+| Active Directory Domain Services | Domain deployment, authentication, and identity management |
+| DNS                              | Domain name resolution and DNS validation                  |
+| Group Policy                     | Workstation security and account policy administration     |
+| SMB                              | Network file sharing and share permissions                 |
+| NTFS                             | File system permissions and access control                 |
+| VMware Workstation               | Virtual machine deployment and virtual networking          |
+| Windows 11                       | Domain joining, authentication, and client testing         |
+| PowerShell                       | Active Directory administration and policy verification    |
+| Windows Server Manager           | Server role installation and file services management      |
+| GitHub                           | Technical documentation and project portfolio management   |
+
+---
+
+## Troubleshooting Experience
+
+During deployment, the File Server role installation encountered error:
+
+`0xC004000D`
+
+The issue was resolved, allowing the File Server role service to be installed successfully.
+
+Post-resolution validation included:
+
+* Confirming departmental SMB shares were operational.
+* Verifying authorized IT share access.
+* Successfully creating a file through the network share.
+* Confirming unauthorized departmental access was restricted.
+
+The installation error and subsequent verification are documented in the troubleshooting report.
+
+**[View Troubleshooting Documentation](documentation/06-Troubleshooting.md)**
+
+---
+
+## Future Improvements
+
+The following enhancements are planned to expand the lab into a more advanced enterprise environment.
+
+### Security
+
+* Expand departmental access testing to HR, Finance, and Sales accounts.
+* Implement additional workstation security baselines.
+* Review and strengthen domain password policies.
+* Configure centralized Windows security event collection.
+
+### Automation
+
+* Develop PowerShell scripts for Active Directory user provisioning.
+* Automate security group membership assignments.
+* Automate common administrative tasks.
+
+### Infrastructure
+
+* Implement automated File Server backups.
+* Test backup restoration and recovery procedures.
+* Deploy additional Windows client workstations.
+* Implement infrastructure monitoring.
+* Expand the environment with additional network services.
+
+---
+
+## Project Status
+
+**Completed — Initial Infrastructure Deployment and Validation**
+
+The initial Active Directory and File Server environment has been deployed, configured, tested, and documented.
+
+The lab demonstrates hands-on experience with Windows Server administration, identity management, Group Policy, network file sharing, and security validation.
+
+Future enhancements will focus on automation, monitoring, backup and recovery, and expanded security testing.
